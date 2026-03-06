@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="cq-title">
+  <title id="cq-title">Cell Quest</title>
+  <defs>
+    <linearGradient id="c-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A78BFA"/>
+      <stop offset="50%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#6D28D9"/>
+    </linearGradient>
+    <radialGradient id="nuc-grad" cx="45%" cy="40%">
+      <stop offset="0%" stop-color="#E0D4FF"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="108" fill="#1A1A2E"/>
+  <path d="M340 130 C260 80, 140 100, 110 180 C80 260, 80 340, 130 400 C180 460, 280 470, 350 420" fill="none" stroke="url(#c-grad)" stroke-width="52" stroke-linecap="round" opacity="0.85"/>
+  <path d="M330 145 C260 100, 155 115, 128 188 C100 262, 100 335, 145 390 C190 445, 275 455, 340 410" fill="none" stroke="#C4B5FD" stroke-width="2" stroke-dasharray="8 5" opacity="0.35" stroke-linecap="round"/>
+  <ellipse cx="245" cy="270" rx="52" ry="48" fill="url(#nuc-grad)" opacity="0.8"/>
+  <ellipse cx="235" cy="258" rx="18" ry="14" fill="#E0D4FF" opacity="0.3"/>
+  <ellipse cx="195" cy="195" rx="18" ry="8" fill="#FF6B6B" opacity="0.8" transform="rotate(-30 195 195)"/>
+  <ellipse cx="300" cy="345" rx="16" ry="7" fill="#FF6B6B" opacity="0.7" transform="rotate(25 300 345)"/>
+  <ellipse cx="310" cy="210" rx="15" ry="9" fill="#4ADE80" opacity="0.75" transform="rotate(15 310 210)"/>
+  <ellipse cx="175" cy="350" rx="13" ry="8" fill="#4ADE80" opacity="0.65" transform="rotate(-10 175 350)"/>
+  <circle cx="200" cy="320" r="16" fill="#4EA8DE" opacity="0.5"/>
+  <circle cx="270" cy="185" r="5" fill="#FFB938" opacity="0.85"/>
+  <circle cx="220" cy="380" r="4.5" fill="#FFB938" opacity="0.75"/>
+  <circle cx="310" cy="275" r="4" fill="#FFB938" opacity="0.8"/>
+  <circle cx="175" cy="240" r="3.5" fill="#FFB938" opacity="0.7"/>
+  <path d="M210 300 Q225 288, 240 300 Q255 312, 270 300" fill="none" stroke="#C4B5FD" stroke-width="1.5" opacity="0.35"/>
+  <circle cx="365" cy="155" r="3" fill="#A78BFA" opacity="0.4"/>
+  <circle cx="380" cy="175" r="2" fill="#C4B5FD" opacity="0.3"/>
+  <circle cx="375" cy="395" r="3" fill="#A78BFA" opacity="0.4"/>
+  <circle cx="390" cy="380" r="2" fill="#C4B5FD" opacity="0.3"/>
+</svg>
