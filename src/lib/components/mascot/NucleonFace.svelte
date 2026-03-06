@@ -1,39 +1,43 @@
 <script lang="ts">
+  type Expression = 'happy' | 'thinking' | 'concerned' | 'celebrating' | 'idle';
   let {
     expression = 'idle'
   }: {
-    expression?: 'happy' | 'thinking' | 'concerned' | 'celebrating' | 'idle';
+    expression?: Expression;
   } = $props();
+
+  // Use a local ref to avoid TS narrowing issues in template conditionals
+  let expr: Expression = $derived(expression);
 </script>
 
-<div class="face" class:thinking={expression === 'thinking'}>
+<div class="face" class:thinking={expr === 'thinking'}>
   <!-- Eyes -->
   <div class="eyes">
-    <div class="eye" class:squint={expression === 'thinking'}>
+    <div class="eye" class:squint={expr === 'thinking'}>
       <div class="eye-white">
-        {#if expression === 'celebrating'}
+        {#if expr === 'celebrating'}
           <div class="star-pupil">&#9733;</div>
         {:else}
-          <div class="pupil" class:wide={expression === 'happy' || expression === 'celebrating'}>
+          <div class="pupil" class:wide={expr === 'happy'}>
             <div class="highlight"></div>
           </div>
         {/if}
       </div>
-      {#if expression === 'concerned'}
+      {#if expr === 'concerned'}
         <div class="eyebrow left"></div>
       {/if}
     </div>
     <div class="eye">
       <div class="eye-white">
-        {#if expression === 'celebrating'}
+        {#if expr === 'celebrating'}
           <div class="star-pupil">&#9733;</div>
         {:else}
-          <div class="pupil" class:wide={expression === 'happy' || expression === 'celebrating'}>
+          <div class="pupil" class:wide={expr === 'happy'}>
             <div class="highlight"></div>
           </div>
         {/if}
       </div>
-      {#if expression === 'concerned'}
+      {#if expr === 'concerned'}
         <div class="eyebrow right"></div>
       {/if}
     </div>
@@ -47,15 +51,15 @@
 
   <!-- Mouth -->
   <div class="mouth-container">
-    {#if expression === 'idle'}
+    {#if expr === 'idle'}
       <div class="mouth smile-small"></div>
-    {:else if expression === 'happy'}
+    {:else if expr === 'happy'}
       <div class="mouth smile-big"></div>
-    {:else if expression === 'thinking'}
+    {:else if expr === 'thinking'}
       <div class="mouth wavy"></div>
-    {:else if expression === 'concerned'}
+    {:else if expr === 'concerned'}
       <div class="mouth frown"></div>
-    {:else if expression === 'celebrating'}
+    {:else if expr === 'celebrating'}
       <div class="mouth open-smile"></div>
     {/if}
   </div>

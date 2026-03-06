@@ -1,7 +1,8 @@
-<script>
+<script lang="ts">
   import PassageCard from './PassageCard.svelte';
   import AnswerOption from './AnswerOption.svelte';
   import FeedbackBanner from './FeedbackBanner.svelte';
+  import type { Question, Difficulty } from '../../data/types';
 
   let {
     question,
@@ -23,9 +24,29 @@
     onTryAgain,
     onContinue,
     onClose
+  }: {
+    question: Question;
+    difficulty: Difficulty;
+    attemptCount: number;
+    selectedAnswer: number | null;
+    showingFeedback: boolean;
+    feedbackType: string | null;
+    hintUnlocked?: boolean;
+    canAffordHint?: boolean;
+    playerScore?: number;
+    elapsedSeconds?: number;
+    lastEarnedPoints?: number;
+    lastSpeedBonus?: number;
+    onSelectAnswer: (index: number) => void;
+    onSubmit: () => void;
+    onUseHint: () => void;
+    onNext: () => void;
+    onTryAgain: () => void;
+    onContinue: () => void;
+    onClose?: () => void;
   } = $props();
 
-  function handleOverlayClick(e) {
+  function handleOverlayClick(e: MouseEvent) {
     if (e.target === e.currentTarget) {
       onClose?.();
     }
@@ -33,13 +54,13 @@
 
   let letters = $derived(question.type === 'tf' ? ['T', 'F'] : ['A', 'B', 'C', 'D']);
 
-  const difficultyStyles = {
+  const difficultyStyles: Record<Difficulty, { bg: string; color: string }> = {
     easy: { bg: '#E8FAEB', color: '#28A745' },
     moderate: { bg: '#FFF8E8', color: '#D49A00' },
     difficult: { bg: '#FFF0F0', color: '#D04040' }
   };
 
-  function getOptionState(index) {
+  function getOptionState(index: number) {
     if (!showingFeedback || feedbackType === 'hint') {
       return selectedAnswer === index ? 'selected' : 'default';
     }
@@ -67,7 +88,7 @@
     return '';
   }
 
-  function formatTime(secs) {
+  function formatTime(secs: number) {
     const m = Math.floor(secs / 60);
     const s = secs % 60;
     return m > 0 ? `${m}:${String(s).padStart(2, '0')}` : `${s}s`;
@@ -148,7 +169,7 @@
     {#if showingFeedback && feedbackType && feedbackType !== 'hint'}
       <div class="feedback-area">
         <FeedbackBanner
-          type={feedbackType}
+          type={feedbackType as 'correct' | 'wrong' | 'hint'}
           message={getFeedbackMessage()}
           points={feedbackType === 'correct' ? lastEarnedPoints : 0}
           showNext={feedbackType === 'correct'}

@@ -1,5 +1,6 @@
-<script>
+<script lang="ts">
   import { initAudio, toggleMute, isMuted } from '../../audio/soundManager';
+  import type { Difficulty } from '../../data/types';
 
   let muted = $state(isMuted());
 
@@ -15,9 +16,17 @@
     completedCount,
     totalCount,
     onNameClick
+  }: {
+    playerName: string;
+    score: number;
+    progress: number;
+    difficulty: Difficulty;
+    completedCount: number;
+    totalCount: number;
+    onNameClick: () => void;
   } = $props();
 
-  const difficultyColors = {
+  const difficultyColors: Record<Difficulty, string> = {
     easy: '#22c55e',
     moderate: '#FFB938',
     difficult: '#FF6B6B'
