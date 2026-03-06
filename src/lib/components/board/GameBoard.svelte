@@ -15,19 +15,19 @@
 
   let playerPos = $derived.by(() => {
     const cp = checkpoints.find((c) => c.id === currentCheckpoint);
-    return cp ? { x: cp.x, y: cp.y } : { x: 80, y: 420 };
+    return cp ? { x: cp.x, y: cp.y } : { x: 80, y: 340 };
   });
 
   // Background floating organelle decorations
   const decorations = [
-    { cx: 150, cy: 100, rx: 40, ry: 25, color: '#7C3AED', dur: '8s' },
-    { cx: 400, cy: 80, rx: 30, ry: 30, color: '#4ADE80', dur: '12s' },
-    { cx: 700, cy: 120, rx: 35, ry: 20, color: '#FF6B6B', dur: '10s' },
-    { cx: 850, cy: 450, rx: 25, ry: 25, color: '#4EA8DE', dur: '9s' },
-    { cx: 200, cy: 460, rx: 20, ry: 30, color: '#F472B6', dur: '11s' },
-    { cx: 550, cy: 450, rx: 45, ry: 22, color: '#FFB938', dur: '7s' },
-    { cx: 800, cy: 180, rx: 18, ry: 18, color: '#C4B5FD', dur: '14s' },
-    { cx: 300, cy: 200, rx: 22, ry: 35, color: '#8B5CF6', dur: '13s' },
+    { cx: 150, cy: 80, rx: 40, ry: 25, color: '#7C3AED', dur: '8s' },
+    { cx: 400, cy: 60, rx: 30, ry: 30, color: '#4ADE80', dur: '12s' },
+    { cx: 700, cy: 100, rx: 35, ry: 20, color: '#FF6B6B', dur: '10s' },
+    { cx: 850, cy: 380, rx: 25, ry: 25, color: '#4EA8DE', dur: '9s' },
+    { cx: 200, cy: 400, rx: 20, ry: 30, color: '#F472B6', dur: '11s' },
+    { cx: 550, cy: 390, rx: 45, ry: 22, color: '#FFB938', dur: '7s' },
+    { cx: 800, cy: 140, rx: 18, ry: 18, color: '#C4B5FD', dur: '14s' },
+    { cx: 300, cy: 160, rx: 22, ry: 35, color: '#8B5CF6', dur: '13s' },
   ];
 </script>
 
@@ -105,8 +105,8 @@
 <style>
   .game-board {
     display: block;
-    max-width: 100%;
-    height: auto;
+    width: 100%;
+    height: 100%;
     border-radius: 12px;
     overflow: hidden;
   }
