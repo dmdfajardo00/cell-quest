@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CELL QUEST — Brand Exploration v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300;400;500;600;700;800;900&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* === THREE GREEN OPTIONS === */
+    --green-A: #4CD964;
+    --green-A-dark: #3BB852;
+    --green-A-light: #6FE882;
+    --green-A-bg: #E8FAEB;
+    --green-A-label: "Lime Green";
+
+    --green-B: #34C759;
+    --green-B-dark: #28A745;
+    --green-B-light: #52D674;
+    --green-B-bg: #E2F8E8;
+    --green-B-label: "Bio Green";
+
+    --green-C: #2DD4A0;
+    --green-C-dark: #22B88A;
+    --green-C-light: #50E0B4;
+    --green-C-bg: #E0FAF3;
+    --green-C-label: "Teal Green";
+
+    /* === SHARED PALETTE === */
+    --dark-bg: #1A1A2E;
+    --dark-surface: #22223A;
+    --dark-elevated: #2A2A48;
+    --dark-border: rgba(255,255,255,0.08);
+
+    --light-bg: #FAFBF6;
+    --light-surface: #FFFFFF;
+    --light-border: rgba(0,0,0,0.08);
+
+    --coral: #FF6B6B;
+    --coral-bg: #FFF0F0;
+    --gold: #FFB938;
+    --gold-bg: #FFF8E8;
+    --sky: #4EA8DE;
+    --sky-bg: #EBF5FC;
+
+    --text-dark: #1A1A2E;
+    --text-mid: #5C5C7A;
+    --text-light: #9898B0;
+    --text-on-dark: #F0F0F8;
+    --text-on-dark-secondary: #B0B0CC;
+
+    /* Fonts */
+    --font-fredoka: 'Fredoka', sans-serif;
+    --font-baloo: 'Baloo 2', cursive;
+    --font-nunito: 'Nunito', sans-serif;
+    --font-body: 'Quicksand', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--light-bg);
+    color: var(--text-dark);
+    font-family: var(--font-body);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* === LAYOUT === */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  section {
+    padding: 80px 0;
+  }
+
+  /* === HERO === */
+  .hero {
+    background: var(--dark-bg);
+    padding: 80px 0 100px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(76, 217, 100, 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(45, 212, 160, 0.04) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(52, 199, 89, 0.03) 0%, transparent 60%);
+  }
+
+  /* Floating cell blobs in hero */
+  .hero-blob {
+    position: absolute;
+    border-radius: 50% 45% 55% 48% / 48% 52% 46% 54%;
+    opacity: 0.08;
+    animation: blobFloat 12s ease-in-out infinite;
+  }
+
+  @keyframes blobFloat {
+    0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    33% { transform: translate(20px, -30px) scale(1.05) rotate(5deg); }
+    66% { transform: translate(-15px, 15px) scale(0.95) rotate(-3deg); }
+  }
+
+  @keyframes wiggle {
+    0%, 100% { border-radius: 50% 45% 55% 48% / 48% 52% 46% 54%; }
+    25% { border-radius: 45% 55% 48% 52% / 52% 46% 54% 48%; }
+    50% { border-radius: 55% 48% 45% 55% / 46% 54% 48% 52%; }
+    75% { border-radius: 48% 52% 55% 45% / 54% 48% 52% 46%; }
+  }
+
+  @keyframes orbit-slow {
+    0% { transform: rotate(0deg) translateX(var(--r)) rotate(0deg); }
+    100% { transform: rotate(360deg) translateX(var(--r)) rotate(-360deg); }
+  }
+
+  @keyframes pulse-soft {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.08); opacity: 1; }
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-badge {
+    display: inline-block;
+    padding: 8px 22px;
+    border-radius: 50px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-on-dark-secondary);
+    margin-bottom: 40px;
+    position: relative;
+    animation: fade-up 0.6s ease-out 0.1s both;
+  }
+
+  .hero-title {
+    font-family: var(--font-fredoka);
+    font-size: clamp(52px, 9vw, 100px);
+    font-weight: 700;
+    color: var(--text-on-dark);
+    line-height: 1.05;
+    margin-bottom: 12px;
+    position: relative;
+    animation: fade-up 0.7s ease-out 0.2s both;
+  }
+
+  .hero-title span {
+    color: var(--green-B);
+    text-shadow: 0 0 40px rgba(52, 199, 89, 0.3);
+  }
+
+  .hero-sub {
+    font-family: var(--font-body);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-on-dark-secondary);
+    margin-bottom: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    position: relative;
+    animation: fade-up 0.7s ease-out 0.3s both;
+  }
+
+  .hero-desc {
+    font-size: 16px;
+    color: var(--text-on-dark-secondary);
+    max-width: 480px;
+    margin: 24px auto 0;
+    position: relative;
+    animation: fade-up 0.7s ease-out 0.4s both;
+    opacity: 0.7;
+  }
+
+  /* Blobby Nucleon in hero */
+  .nucleon-hero {
+    position: relative;
+    width: 240px;
+    height: 240px;
+    margin: 50px auto 0;
+    animation: fade-up 0.8s ease-out 0.5s both;
+  }
+
+  .nucleon-body {
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle at 38% 35%, #5CE07A, var(--green-B) 60%, #28A745);
+    border-radius: 50% 45% 55% 48% / 48% 52% 46% 54%;
+    animation: wiggle 6s ease-in-out infinite;
+    box-shadow:
+      0 0 30px rgba(52, 199, 89, 0.3),
+      0 0 60px rgba(52, 199, 89, 0.1),
+      inset 0 -8px 20px rgba(0,0,0,0.15),
+      inset 0 8px 15px rgba(255,255,255,0.15);
+  }
+
+  .nucleon-body .face {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding-bottom: 10px;
+  }
+
+  .nucleon-body .eye {
+    width: 18px;
+    height: 22px;
+    background: white;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+
+  .nucleon-body .eye::after {
+    content: '';
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    background: var(--dark-bg);
+    border-radius: 50%;
+    top: 6px;
+    left: 5px;
+  }
+
+  .nucleon-body .eye::before {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    top: 5px;
+    left: 9px;
+    z-index: 2;
+  }
+
+  .nucleon-body .mouth {
+    position: absolute;
+    bottom: 26px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px;
+    height: 12px;
+    background: rgba(0,0,0,0.15);
+    border-radius: 0 0 50% 50%;
+  }
+
+  .nucleon-body .cheek {
+    position: absolute;
+    width: 14px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 150, 150, 0.25);
+    bottom: 32px;
+  }
+
+  .nucleon-body .cheek-l { left: 14px; }
+  .nucleon-body .cheek-r { right: 14px; }
+
+  /* Orbiting organelles */
+  .orb-ring {
+    position: absolute;
+    border: 1.5px dashed rgba(52, 199, 89, 0.12);
+    border-radius: 50%;
+    top: 50%; left: 50%;
+  }
+
+  .orb-ring-1 { width: 170px; height: 170px; margin: -85px 0 0 -85px; }
+  .orb-ring-2 { width: 220px; height: 220px; margin: -110px 0 0 -110px; border-color: rgba(52,199,89,0.08); }
+
+  .orb {
+    position: absolute;
+    border-radius: 50% 44% 56% 48% / 46% 54% 44% 56%;
+    top: 50%; left: 50%;
+    animation: orbit-slow var(--speed) linear infinite var(--dir, normal), wiggle 4s ease-in-out infinite;
+    box-shadow: 0 0 12px var(--glow);
+  }
+
+  .orb-cyan {
+    width: 22px; height: 22px; margin: -11px 0 0 -11px;
+    background: radial-gradient(circle at 35% 35%, #6FE8FF, var(--sky));
+    --r: 85px; --speed: 7s; --glow: rgba(78, 168, 222, 0.4);
+  }
+
+  .orb-pink {
+    width: 16px; height: 16px; margin: -8px 0 0 -8px;
+    background: radial-gradient(circle at 35% 35%, #FF9EBE, var(--coral));
+    --r: 85px; --speed: 10s; --dir: reverse; --glow: rgba(255, 107, 107, 0.4);
+  }
+
+  .orb-gold {
+    width: 18px; height: 18px; margin: -9px 0 0 -9px;
+    background: radial-gradient(circle at 35% 35%, #FFD76E, var(--gold));
+    --r: 110px; --speed: 13s; --glow: rgba(255, 185, 56, 0.4);
+  }
+
+  .orb-green {
+    width: 14px; height: 14px; margin: -7px 0 0 -7px;
+    background: radial-gradient(circle at 35% 35%, #6FFF9E, #4ADE80);
+    --r: 110px; --speed: 16s; --dir: reverse; --glow: rgba(74, 222, 128, 0.4);
+  }
+
+  /* === SECTION STYLING === */
+  .section-label {
+    font-family: var(--font-nunito);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 10px;
+  }
+
+  .section-title {
+    font-family: var(--font-fredoka);
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+  }
+
+  .section-desc {
+    font-size: 16px;
+    color: var(--text-mid);
+    max-width: 580px;
+    margin-bottom: 50px;
+  }
+
+  .divider {
+    width: 50px;
+    height: 4px;
+    background: var(--green-B);
+    border-radius: 4px;
+    margin: 0 auto;
+    opacity: 0.5;
+  }
+
+  /* === COLOR COMPARISON === */
+  .color-compare-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .color-option {
+    border-radius: 24px;
+    overflow: hidden;
+    border: 2px solid var(--light-border);
+    background: var(--light-surface);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .color-option:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+  }
+
+  .color-option-tag {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .color-hero-strip {
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .color-hero-strip .blob-demo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50% 45% 55% 48% / 48% 52% 46% 54%;
+    animation: wiggle 5s ease-in-out infinite, pulse-soft 3s ease-in-out infinite;
+  }
+
+  .color-option-body {
+    padding: 28px;
+  }
+
+  .color-option-name {
+    font-family: var(--font-fredoka);
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .color-option-hex {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-light);
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+
+  .color-swatch-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .mini-swatch {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    position: relative;
+  }
+
+  .mini-swatch-label {
+    font-size: 9px;
+    text-align: center;
+    margin-top: 4px;
+    color: var(--text-light);
+    font-weight: 600;
+  }
+
+  .color-demo-area {
+    padding: 20px;
+    border-radius: 16px;
+    margin-bottom: 16px;
+  }
+
+  .color-demo-btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 14px;
+    border: none;
+    font-family: var(--font-fredoka);
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.15);
+    transition: all 0.15s ease;
+    margin-bottom: 12px;
+  }
+
+  .color-demo-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .color-demo-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.15);
+  }
+
+  .color-demo-feedback {
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .color-desc {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.6;
+  }
+
+  /* === FONT COMPARISON === */
+  .font-compare-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .font-option {
+    border-radius: 24px;
+    border: 2px solid var(--light-border);
+    background: var(--light-surface);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .font-option:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+  }
+
+  .font-preview-dark {
+    background: var(--dark-bg);
+    padding: 36px 28px;
+    text-align: center;
+  }
+
+  .font-preview-dark .title-demo {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--text-on-dark);
+    margin-bottom: 4px;
+  }
+
+  .font-preview-dark .sub-demo {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--text-on-dark-secondary);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  .font-option-body {
+    padding: 28px;
+  }
+
+  .font-option-name {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 4px;
+  }
+
+  .font-option-label {
+    font-family: var(--font-fredoka);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+  }
+
+  .font-specimen {
+    margin-bottom: 20px;
+  }
+
+  .font-specimen-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 6px;
+  }
+
+  .font-specimen-text {
+    line-height: 1.4;
+    color: var(--text-dark);
+  }
+
+  .font-weights-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--light-border);
+  }
+
+  .font-weight-tag {
+    padding: 4px 12px;
+    border-radius: 8px;
+    background: var(--light-bg);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-mid);
+  }
+
+  .font-vibe {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+
+  /* === SPLIT THEME DEMO === */
+  .split-demo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 2px solid var(--light-border);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.06);
+  }
+
+  .split-dark {
+    background: var(--dark-bg);
+    padding: 48px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .split-dark::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 80%, rgba(52, 199, 89, 0.05) 0%, transparent 60%);
+  }
+
+  .split-light {
+    background: var(--light-surface);
+    padding: 48px 40px;
+  }
+
+  .split-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0.5;
+  }
+
+  /* Petri dish container */
+  .petri-dish {
+    background: rgba(255,255,255,0.04);
+    border: 1.5px solid rgba(255,255,255,0.08);
+    border-radius: 50% 48% 52% 50% / 50% 52% 48% 50%;
+    padding: 32px;
+    text-align: center;
+    position: relative;
+  }
+
+  .petri-dish::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border: 1px dashed rgba(255,255,255,0.05);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  .petri-dish .checkpoint-name {
+    font-family: var(--font-fredoka);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-on-dark);
+    margin-top: 10px;
+  }
+
+  .petri-dish .checkpoint-icon {
+    font-size: 32px;
+    margin-bottom: 4px;
+  }
+
+  /* Reading card (light side) */
+  .reading-card {
+    background: var(--light-surface);
+    border: 1.5px solid var(--light-border);
+    border-radius: 20px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+
+  .reading-card-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .reading-card p {
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.7;
+  }
+
+  /* Blob button (Duolingo style) */
+  .blob-btn {
+    display: inline-block;
+    padding: 14px 32px;
+    border-radius: 16px;
+    border: none;
+    font-family: var(--font-fredoka);
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    background: var(--green-B);
+    box-shadow: 0 5px 0 var(--green-B-dark);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    position: relative;
+  }
+
+  .blob-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 0 var(--green-B-dark);
+  }
+
+  .blob-btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 var(--green-B-dark);
+  }
+
+  /* Membrane feedback */
+  .membrane-feedback {
+    padding: 14px 18px;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .membrane-feedback::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    border-radius: 4px 0 0 4px;
+  }
+
+  .membrane-feedback.correct {
+    background: #E8FAEB;
+    border: 1.5px solid rgba(52, 199, 89, 0.25);
+    color: #28A745;
+  }
+
+  .membrane-feedback.correct::before { background: var(--green-B); }
+
+  .membrane-feedback.incorrect {
+    background: #FFF0F0;
+    border: 1.5px solid rgba(255, 107, 107, 0.25);
+    color: #D04040;
+  }
+
+  .membrane-feedback.incorrect::before { background: var(--coral); }
+
+  /* === COMPONENT SHOWCASE === */
+  .showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 28px;
+  }
+
+  .showcase-card {
+    background: var(--light-surface);
+    border: 2px solid var(--light-border);
+    border-radius: 24px;
+    overflow: hidden;
+  }
+
+  .showcase-card-label {
+    padding: 20px 28px 0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+
+  .showcase-card-body {
+    padding: 20px 28px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* Answer blobs */
+  .answer-blob {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    border-radius: 16px;
+    border: 2px solid var(--light-border);
+    background: var(--light-surface);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .answer-blob:hover {
+    border-color: var(--green-B);
+    background: var(--green-B-bg);
+  }
+
+  .answer-blob.selected {
+    border-color: var(--green-B);
+    background: var(--green-B-bg);
+    color: var(--green-B-dark);
+    box-shadow: 0 3px 0 var(--green-B-dark);
+  }
+
+  .answer-blob.wrong {
+    border-color: var(--coral);
+    background: var(--coral-bg);
+    color: #D04040;
+  }
+
+  .answer-blob .letter {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-fredoka);
+    font-size: 14px;
+    font-weight: 600;
+    background: var(--light-bg);
+    color: var(--text-mid);
+    flex-shrink: 0;
+    border: 1.5px solid var(--light-border);
+  }
+
+  .answer-blob.selected .letter {
+    background: var(--green-B);
+    color: white;
+    border-color: var(--green-B);
+  }
+
+  .answer-blob.wrong .letter {
+    background: var(--coral);
+    color: white;
+    border-color: var(--coral);
+  }
+
+  /* Progress */
+  .progress-track {
+    width: 100%;
+    height: 14px;
+    background: var(--light-bg);
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1.5px solid var(--light-border);
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 14px;
+    background: linear-gradient(90deg, var(--green-B), var(--green-A-light));
+    box-shadow: inset 0 2px 0 rgba(255,255,255,0.3);
+    width: 60%;
+    transition: width 0.6s ease;
+  }
+
+  .badge-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .point-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-family: var(--font-fredoka);
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .badge-gold {
+    background: var(--gold-bg);
+    border: 1.5px solid rgba(255, 185, 56, 0.3);
+    color: #D49A00;
+  }
+
+  .badge-level {
+    background: var(--green-B-bg);
+    border: 1.5px solid rgba(52, 199, 89, 0.3);
+    color: var(--green-B-dark);
+  }
+
+  .diff-row {
+    display: flex;
+    gap: 8px;
+  }
+
+  .diff-pill {
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-family: var(--font-fredoka);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .diff-easy { background: #E8FAEB; color: #28A745; border: 1.5px solid rgba(40,167,69,0.2); }
+  .diff-mod { background: var(--gold-bg); color: #D49A00; border: 1.5px solid rgba(255,185,56,0.2); }
+  .diff-hard { background: var(--coral-bg); color: #D04040; border: 1.5px solid rgba(255,107,107,0.2); }
+
+  /* Leaderboard on dark */
+  .lb-dark {
+    background: var(--dark-bg);
+    border-radius: 24px;
+    padding: 28px;
+    border: 2px solid var(--dark-border);
+  }
+
+  .lb-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    border-radius: 16px;
+    background: var(--dark-surface);
+    border: 1.5px solid var(--dark-border);
+    margin-bottom: 10px;
+    transition: all 0.2s ease;
+  }
+
+  .lb-row:last-child { margin-bottom: 0; }
+
+  .lb-row:hover {
+    border-color: rgba(52, 199, 89, 0.2);
+    background: var(--dark-elevated);
+  }
+
+  .lb-row.first {
+    border-color: rgba(255, 185, 56, 0.2);
+    background: rgba(255, 185, 56, 0.04);
+  }
+
+  .lb-rank-num {
+    font-family: var(--font-fredoka);
+    font-size: 18px;
+    font-weight: 700;
+    width: 28px;
+    text-align: center;
+    color: var(--text-on-dark-secondary);
+  }
+
+  .lb-row.first .lb-rank-num { color: var(--gold); }
+
+  .lb-avatar-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .lb-player-name {
+    flex: 1;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-on-dark);
+  }
+
+  .lb-score {
+    font-family: var(--font-fredoka);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--gold);
+  }
+
+  /* === VOICE SECTION === */
+  .voice-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
+  .voice-card {
+    background: var(--light-surface);
+    border: 2px solid var(--light-border);
+    border-radius: 24px;
+    padding: 32px;
+  }
+
+  .voice-tag {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .voice-tag.good { color: var(--green-B-dark); }
+  .voice-tag.bad { color: var(--coral); }
+
+  .voice-example {
+    font-size: 16px;
+    font-style: italic;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+    line-height: 1.6;
+  }
+
+  .voice-note {
+    font-size: 13px;
+    color: var(--text-light);
+  }
+
+  .tone-pills {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+
+  .tone-pill {
+    text-align: center;
+    background: var(--light-surface);
+    border: 2px solid var(--light-border);
+    border-radius: 20px;
+    padding: 20px 28px;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .tone-pill .icon { font-size: 28px; margin-bottom: 8px; }
+
+  .tone-pill .label {
+    font-family: var(--font-fredoka);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 2px;
+  }
+
+  .tone-pill .sub {
+    font-size: 12px;
+    color: var(--text-light);
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 900px) {
+    .container { padding: 0 20px; }
+    .color-compare-grid, .font-compare-grid { grid-template-columns: 1fr; }
+    .split-demo { grid-template-columns: 1fr; }
+    .showcase-grid { grid-template-columns: 1fr; }
+    .voice-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <div class="hero-blob" style="width: 300px; height: 300px; background: rgba(52,199,89,0.5); top: -80px; left: -100px; animation-delay: 0s;"></div>
+  <div class="hero-blob" style="width: 200px; height: 200px; background: rgba(78,168,222,0.5); bottom: -60px; right: -60px; animation-delay: -4s;"></div>
+  <div class="hero-blob" style="width: 150px; height: 150px; background: rgba(255,185,56,0.4); top: 40%; right: 10%; animation-delay: -8s;"></div>
+
+  <div class="container" style="position: relative;">
+    <div class="hero-badge">Brand Exploration v2 — Choose Your Direction</div>
+    <h1 class="hero-title">CELL <span>QUEST</span></h1>
+    <p class="hero-sub">An Interactive Digital Journey</p>
+    <p class="hero-desc">Spore's playfulness meets Duolingo's clarity. Split dark/light theme with blobby organic UI.</p>
+
+    <div class="nucleon-hero">
+      <div class="orb-ring orb-ring-1"></div>
+      <div class="orb-ring orb-ring-2"></div>
+      <div class="orb orb-cyan"></div>
+      <div class="orb orb-pink"></div>
+      <div class="orb orb-gold"></div>
+      <div class="orb orb-green"></div>
+      <div class="nucleon-body">
+        <div class="face">
+          <div class="eye"></div>
+          <div class="eye"></div>
+        </div>
+        <div class="mouth"></div>
+        <div class="cheek cheek-l"></div>
+        <div class="cheek cheek-r"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- ========== GREEN OPTIONS ========== -->
+  <section>
+    <div class="section-label">Pick Your Green</div>
+    <h2 class="section-title">Three Greens, Three Vibes</h2>
+    <p class="section-desc">Each green shifts the entire personality of the game. See them in context — on buttons, feedback, backgrounds, and the mascot.</p>
+
+    <div class="color-compare-grid">
+
+      <!-- Option A: Lime Green -->
+      <div class="color-option">
+        <div class="color-hero-strip" style="background: linear-gradient(135deg, #4CD964, #6FE882);">
+          <div class="blob-demo" style="background: radial-gradient(circle at 35% 35%, #8FF5A2, #4CD964); box-shadow: 0 0 30px rgba(76,217,100,0.4);"></div>
+        </div>
+        <div class="color-option-body">
+          <div class="color-option-tag" style="background: #E8FAEB; color: #3BB852;">Option A</div>
+          <div class="color-option-name" style="color: #3BB852;">Lime Green</div>
+          <div class="color-option-hex">#4CD964 · Duolingo-adjacent</div>
+
+          <div class="color-swatch-row">
+            <div>
+              <div class="mini-swatch" style="background: #3BB852;"></div>
+              <div class="mini-swatch-label">Dark</div>
+            </div>
+            <div>
+              <div class="mini-swatch" style="background: #4CD964;"></div>
+              <div class="mini-swatch-label">Main</div>
+            </div>
+            <div>
+              <div class="mini-swatch" style="background: #6FE882;"></div>
+              <div class="mini-swatch-label">Light</div>
+            </div>
+            <div>
+              <div class="mini-swatch" style="background: #E8FAEB;"></div>
+              <div class="mini-swatch-label">Tint</div>
+            </div>
+          </div>
+
+          <div class="color-demo-area" style="background: #E8FAEB; border-radius: 16px;">
+            <button class="color-demo-btn" style="background: #4CD964; box-shadow: 0 4px 0 #3BB852;">Start Quest ✦</button>
+            <div class="color-demo-feedback" style="background: white; border: 1.5px solid rgba(76,217,100,0.25); color: #3BB852; border-left: 4px solid #4CD964;">
+              ✓ Correct! Great job!
+            </div>
+          </div>
+
+          <p class="color-desc">Bright, energetic, immediately recognizable. Feels youthful and encouraging. Most similar to Duolingo's vibe — familiar and approachable for students.</p>
+        </div>
+      </div>
+
+      <!-- Option B: Bio Green -->
+      <div class="color-option">
+        <div class="color-hero-strip" style="background: linear-gradient(135deg, #34C759, #52D674);">
+          <div class="blob-demo" style="background: radial-gradient(circle at 35% 35%, #6FE88A, #34C759); box-shadow: 0 0 30px rgba(52,199,89,0.4);"></div>
+        </div>
+        <div class="color-option-body">
+          <div class="color-option-tag" style="background: #E2F8E8; color: #28A745;">Option B — Recommended</div>
+          <div class="color-option-name" style="color: #28A745;">Bio Green</div>
+          <div class="color-option-hex">#34C759 · Chloroplast-inspired</div>
+
+          <div class="color-swatch-row">
+            <div>
+              <div class="mini-swatch" style="background: #28A745;"></div>
+              <div class="mini-swatch-label">Dark</div>
+            </div>
+            <div>
+              <div class="mini-swatch" style="background: #34C759;"></div>
+              <div class="mini-swatch-label">Main</div>
+            </div>
+            <div>
+              <div class="mini-swatch" style="background: #52D674;"></div>
+              <div class="mini-swatch-label">Light</div>
+            </div>
+            <div>
+              <div class="mini-swatch" style="background: #E2F8E8;"></div>
+              <div class="mini-swatch-label">Tint</div>
+            </div>
+          </div>
+
+          <div class="color-demo-area" style="background: #E2F8E8; border-radius: 16px;">
+            <button class="color-demo-btn" style="background: #34C759; box-shadow: 0 4px 0 #28A745;">Start Quest ✦</button>
+            <div class="color-demo-feedback" style="background: white; border: 1.5px solid rgba(52,199,89,0.25); color: #28A745; border-left: 4px solid #34C759;">
+              ✓ Correct! Great job!
+            </div>
+          </div>
+
+          <p class="color-desc">Richer, more organic — like looking through a microscope at chloroplasts. Distinct from Duolingo while keeping the same energy. Feels scientific yet friendly.</p>
+        </div>
+      </div>
+
+      <!-- Option C: Teal Green -->
+      <div class="color-option">
+        <div class="color-hero-strip" style="background: linear-gradient(135deg, #2DD4A0, #50E0B4);">
+          <div class="blob-demo" style="background: radial-gradient(circle at 35% 35%, #70ECC8, #2DD4A0); box-shadow: 0 0 30px rgba(45,212,160,0.4);"></div>
+        </div>
+        <div class="color-option-body">
+          <div class="color-option-tag" style="background: #E0FAF3; color: #22B88A;">Option C</div>
+          <div class="color-option-name" style="color: #22B88A;">Teal Green</div>
+          <div class="color-option-hex">#2DD4A0 · Laboratory aesthetic</div>
+
+          <div class="color-swatch-row">
+            <div>
+              <div class="mini-swatch" style="background: #22B88A;"></div>
+              <div class="mini-swatch-label">Dark</div>
+            </div>
+            <div>
+              <div class="mini-swatch" style="background: #2DD4A0;"></div>
+              <div class="mini-swatch-label">Main</div>
+            </div>
+            <div>
+              <div class="mini-swatch" style="background: #50E0B4;"></div>
+              <div class="mini-swatch-label">Light</div>
+            </div>
+            <div>
+              <div class="mini-swatch" style="background: #E0FAF3;"></div>
+              <div class="mini-swatch-label">Tint</div>
+            </div>
+          </div>
+
+          <div class="color-demo-area" style="background: #E0FAF3; border-radius: 16px;">
+            <button class="color-demo-btn" style="background: #2DD4A0; box-shadow: 0 4px 0 #22B88A;">Start Quest ✦</button>
+            <div class="color-demo-feedback" style="background: white; border: 1.5px solid rgba(45,212,160,0.25); color: #22B88A; border-left: 4px solid #2DD4A0;">
+              ✓ Correct! Great job!
+            </div>
+          </div>
+
+          <p class="color-desc">Most unique of the three — cooler, more sophisticated, lab/microscope feel. Stands out from educational apps. Slightly more "sci-fi" than "biology class."</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ========== FONT OPTIONS ========== -->
+  <section>
+    <div class="section-label">Pick Your Font</div>
+    <h2 class="section-title" style="font-family: var(--font-fredoka);">Three Fonts, Three Personalities</h2>
+    <p class="section-desc">The title font sets the tone for the entire game. See each one as the CELL QUEST logo and in UI context.</p>
+
+    <div class="font-compare-grid">
+
+      <!-- Fredoka -->
+      <div class="font-option">
+        <div class="font-preview-dark">
+          <div class="title-demo" style="font-family: var(--font-fredoka);">CELL QUEST</div>
+          <div class="sub-demo">Interactive Digital Journey</div>
+        </div>
+        <div class="font-option-body">
+          <div class="font-vibe" style="background: #FFF0E8; color: #E86830;">Most Spore-like</div>
+          <div class="font-option-name">Google Fonts</div>
+          <div class="font-option-label" style="font-family: var(--font-fredoka);">Fredoka</div>
+
+          <div class="font-specimen">
+            <div class="font-specimen-label">Heading sample</div>
+            <div class="font-specimen-text" style="font-family: var(--font-fredoka); font-size: 20px; font-weight: 600;">The Mitochondria: Powerhouse of the Cell</div>
+          </div>
+
+          <div class="font-specimen">
+            <div class="font-specimen-label">Button text</div>
+            <div style="display: inline-block; padding: 10px 24px; background: var(--green-B); color: white; border-radius: 14px; font-family: var(--font-fredoka); font-size: 15px; font-weight: 600; box-shadow: 0 4px 0 #28A745;">Start Quest ✦</div>
+          </div>
+
+          <div class="font-weights-row">
+            <span class="font-weight-tag" style="font-family: var(--font-fredoka); font-weight: 400;">Regular</span>
+            <span class="font-weight-tag" style="font-family: var(--font-fredoka); font-weight: 600;">SemiBold</span>
+            <span class="font-weight-tag" style="font-family: var(--font-fredoka); font-weight: 700;">Bold</span>
+          </div>
+
+          <p style="margin-top: 14px; font-size: 13px; color: var(--text-mid);">Thick, bubbly, organic. Like Spore's own UI. Very playful and kid-friendly. Strong personality.</p>
+        </div>
+      </div>
+
+      <!-- Baloo 2 -->
+      <div class="font-option">
+        <div class="font-preview-dark">
+          <div class="title-demo" style="font-family: var(--font-baloo);">CELL QUEST</div>
+          <div class="sub-demo">Interactive Digital Journey</div>
+        </div>
+        <div class="font-option-body">
+          <div class="font-vibe" style="background: #E8F0FF; color: #4A7FD0;">Balanced Pick</div>
+          <div class="font-option-name">Google Fonts</div>
+          <div class="font-option-label" style="font-family: var(--font-baloo);">Baloo 2</div>
+
+          <div class="font-specimen">
+            <div class="font-specimen-label">Heading sample</div>
+            <div class="font-specimen-text" style="font-family: var(--font-baloo); font-size: 20px; font-weight: 600;">The Mitochondria: Powerhouse of the Cell</div>
+          </div>
+
+          <div class="font-specimen">
+            <div class="font-specimen-label">Button text</div>
+            <div style="display: inline-block; padding: 10px 24px; background: var(--green-B); color: white; border-radius: 14px; font-family: var(--font-baloo); font-size: 15px; font-weight: 600; box-shadow: 0 4px 0 #28A745;">Start Quest ✦</div>
+          </div>
+
+          <div class="font-weights-row">
+            <span class="font-weight-tag" style="font-family: var(--font-baloo); font-weight: 400;">Regular</span>
+            <span class="font-weight-tag" style="font-family: var(--font-baloo); font-weight: 600;">SemiBold</span>
+            <span class="font-weight-tag" style="font-family: var(--font-baloo); font-weight: 800;">ExtraBold</span>
+          </div>
+
+          <p style="margin-top: 14px; font-size: 13px; color: var(--text-mid);">Rounded and warm but with better readability at smaller sizes. Playful without being cartoonish. Works great for both titles and UI.</p>
+        </div>
+      </div>
+
+      <!-- Nunito -->
+      <div class="font-option">
+        <div class="font-preview-dark">
+          <div class="title-demo" style="font-family: var(--font-nunito); font-weight: 800;">CELL QUEST</div>
+          <div class="sub-demo">Interactive Digital Journey</div>
+        </div>
+        <div class="font-option-body">
+          <div class="font-vibe" style="background: #F0E8FF; color: #8A5FD0;">Most Polished</div>
+          <div class="font-option-name">Google Fonts</div>
+          <div class="font-option-label" style="font-family: var(--font-nunito); font-weight: 700;">Nunito</div>
+
+          <div class="font-specimen">
+            <div class="font-specimen-label">Heading sample</div>
+            <div class="font-specimen-text" style="font-family: var(--font-nunito); font-size: 20px; font-weight: 700;">The Mitochondria: Powerhouse of the Cell</div>
+          </div>
+
+          <div class="font-specimen">
+            <div class="font-specimen-label">Button text</div>
+            <div style="display: inline-block; padding: 10px 24px; background: var(--green-B); color: white; border-radius: 14px; font-family: var(--font-nunito); font-size: 15px; font-weight: 700; box-shadow: 0 4px 0 #28A745;">Start Quest ✦</div>
+          </div>
+
+          <div class="font-weights-row">
+            <span class="font-weight-tag" style="font-family: var(--font-nunito); font-weight: 400;">Regular</span>
+            <span class="font-weight-tag" style="font-family: var(--font-nunito); font-weight: 700;">Bold</span>
+            <span class="font-weight-tag" style="font-family: var(--font-nunito); font-weight: 900;">Black</span>
+          </div>
+
+          <p style="margin-top: 14px; font-size: 13px; color: var(--text-mid);">Clean, rounded, professional. Closest to Duolingo's feel. Very readable at all sizes. Less personality but maximum clarity.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ========== SPLIT THEME DEMO ========== -->
+  <section>
+    <div class="section-label">Split Theme Preview</div>
+    <h2 class="section-title" style="font-family: var(--font-fredoka);">Dark Board ↔ Light Panels</h2>
+    <p class="section-desc">The game board lives in the dark (immersive Spore feel), while reading passages and answers live in the light (Duolingo clarity).</p>
+
+    <div class="split-demo">
+      <div class="split-dark">
+        <div class="split-label" style="color: var(--text-on-dark-secondary);">🎮 Game Board Side</div>
+
+        <div style="display: flex; gap: 20px; justify-content: center; margin-top: 20px; flex-wrap: wrap;">
+          <div class="petri-dish" style="width: 140px; height: 140px;">
+            <div class="checkpoint-icon">🧬</div>
+            <div class="checkpoint-name">Nucleus</div>
+          </div>
+          <div class="petri-dish" style="width: 140px; height: 140px; border-color: rgba(255,185,56,0.15);">
+            <div class="checkpoint-icon">⚡</div>
+            <div class="checkpoint-name">Mitochondria</div>
+          </div>
+        </div>
+
+        <div style="margin-top: 28px;">
+          <div class="lb-row first">
+            <span class="lb-rank-num">1</span>
+            <div class="lb-avatar-circle" style="background: rgba(255,185,56,0.1); border: 1.5px solid rgba(255,185,56,0.25);">🏆</div>
+            <span class="lb-player-name">Team Nucleus</span>
+            <span class="lb-score">⭐ 780</span>
+          </div>
+          <div class="lb-row">
+            <span class="lb-rank-num">2</span>
+            <div class="lb-avatar-circle" style="background: rgba(52,199,89,0.1); border: 1.5px solid rgba(52,199,89,0.25);">🧬</div>
+            <span class="lb-player-name">Cell Explorers</span>
+            <span class="lb-score">⭐ 650</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="split-light">
+        <div class="split-label" style="color: var(--text-light);">📖 Reading & Answer Side</div>
+
+        <div class="reading-card" style="margin-top: 20px; border-color: rgba(0,0,0,0.06);">
+          <div class="reading-card-label">📄 Reading Passage — Easy</div>
+          <p>The mitochondria is often called the "powerhouse" of the cell. It converts nutrients into energy that the cell can use through a process called cellular respiration.</p>
+        </div>
+
+        <div style="font-family: var(--font-fredoka); font-size: 16px; font-weight: 600; margin-bottom: 10px; color: var(--text-dark);">What is the main function of mitochondria?</div>
+
+        <div class="answer-blob" style="margin-bottom: 8px;">
+          <span class="letter">A</span> Store genetic information
+        </div>
+        <div class="answer-blob selected">
+          <span class="letter">B</span> Produce energy for the cell ✓
+        </div>
+
+        <div class="membrane-feedback correct" style="margin-top: 12px;">
+          ✓ Correct! Mitochondria produce ATP — the cell's energy currency.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ========== UI COMPONENTS ========== -->
+  <section>
+    <div class="section-label">Component Library</div>
+    <h2 class="section-title" style="font-family: var(--font-fredoka);">All UI Elements</h2>
+    <p class="section-desc">Bubbly blob buttons, organic membrane borders, clean cards, and petri-dish containers — all working together.</p>
+
+    <div class="showcase-grid">
+
+      <!-- Buttons -->
+      <div class="showcase-card">
+        <div class="showcase-card-label">Blob Buttons</div>
+        <div class="showcase-card-body">
+          <button class="blob-btn" style="width: 100%;">Start Quest ✦</button>
+          <button class="blob-btn" style="width: 100%; background: var(--sky); box-shadow: 0 5px 0 #3A8BC2;">Continue Reading 📖</button>
+          <button class="blob-btn" style="width: 100%; background: white; color: var(--text-dark); border: 2px solid var(--light-border); box-shadow: 0 5px 0 #D0D0D8;">Skip for Now</button>
+          <button class="blob-btn" style="width: fit-content; background: rgba(78,168,222,0.1); color: var(--sky); border: 2px solid rgba(78,168,222,0.25); box-shadow: none; font-size: 14px; padding: 10px 20px;">💡 Use Hint (−10 pts)</button>
+        </div>
+      </div>
+
+      <!-- Progress & Badges -->
+      <div class="showcase-card">
+        <div class="showcase-card-label">Progress & Badges</div>
+        <div class="showcase-card-body">
+          <div>
+            <div style="font-size: 12px; font-weight: 600; color: var(--text-light); margin-bottom: 6px;">LEVEL PROGRESS</div>
+            <div class="progress-track">
+              <div class="progress-fill"></div>
+            </div>
+          </div>
+          <div class="badge-row">
+            <div class="point-badge badge-gold">⭐ 450 pts</div>
+            <div class="point-badge badge-level">🧬 Level 2</div>
+          </div>
+          <div class="diff-row">
+            <span class="diff-pill diff-easy">Easy</span>
+            <span class="diff-pill diff-mod">Moderate</span>
+            <span class="diff-pill diff-hard">Difficult</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feedback -->
+      <div class="showcase-card">
+        <div class="showcase-card-label">Feedback Banners</div>
+        <div class="showcase-card-body">
+          <div class="membrane-feedback correct">
+            ✓ <strong>Correct!</strong>&nbsp; Mitochondria produce ATP through cellular respiration.
+          </div>
+          <div class="membrane-feedback incorrect">
+            ✗ <strong>Not quite.</strong>&nbsp; Hint: This organelle is known as the "powerhouse."
+          </div>
+          <div class="membrane-feedback" style="background: var(--sky-bg); border-color: rgba(78,168,222,0.25); color: #3A7FC2;">
+            💡 <strong>Hint:</strong>&nbsp; Re-read the second sentence of the passage carefully.
+          </div>
+          <div class="membrane-feedback" style="background: var(--gold-bg); border-color: rgba(255,185,56,0.25); color: #B88A00;">
+            ⭐ <strong>+50 points!</strong>&nbsp; You answered first. Nice work!
+          </div>
+        </div>
+      </div>
+
+      <!-- Answer States -->
+      <div class="showcase-card">
+        <div class="showcase-card-label">Answer States</div>
+        <div class="showcase-card-body">
+          <div class="answer-blob">
+            <span class="letter">A</span> Default state
+          </div>
+          <div class="answer-blob selected">
+            <span class="letter">B</span> Selected / Correct ✓
+          </div>
+          <div class="answer-blob wrong">
+            <span class="letter">C</span> Incorrect ✗
+          </div>
+          <div class="answer-blob" style="border-color: var(--sky); background: var(--sky-bg); color: #3A7FC2;">
+            <span class="letter" style="background: var(--sky); color: white; border-color: var(--sky);">?</span> True or False?
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Leaderboard on dark -->
+    <div style="margin-top: 28px;">
+      <div class="lb-dark">
+        <div style="font-family: var(--font-fredoka); font-size: 18px; font-weight: 600; color: var(--text-on-dark); margin-bottom: 16px;">🏆 Leaderboard</div>
+        <div class="lb-row first">
+          <span class="lb-rank-num">1</span>
+          <div class="lb-avatar-circle" style="background: rgba(255,185,56,0.1); border: 1.5px solid rgba(255,185,56,0.25);">🏆</div>
+          <span class="lb-player-name">Team Mitochondria</span>
+          <span class="lb-score">⭐ 780</span>
+        </div>
+        <div class="lb-row">
+          <span class="lb-rank-num">2</span>
+          <div class="lb-avatar-circle" style="background: rgba(52,199,89,0.1); border: 1.5px solid rgba(52,199,89,0.25);">🧬</div>
+          <span class="lb-player-name">Cell Explorers</span>
+          <span class="lb-score">⭐ 650</span>
+        </div>
+        <div class="lb-row">
+          <span class="lb-rank-num">3</span>
+          <div class="lb-avatar-circle" style="background: rgba(78,168,222,0.1); border: 1.5px solid rgba(78,168,222,0.25);">🔬</div>
+          <span class="lb-player-name">Nucleus Squad</span>
+          <span class="lb-score">⭐ 520</span>
+        </div>
+        <div class="lb-row">
+          <span class="lb-rank-num">4</span>
+          <div class="lb-avatar-circle" style="background: rgba(255,107,107,0.1); border: 1.5px solid rgba(255,107,107,0.25);">🧪</div>
+          <span class="lb-player-name">Ribosome Rangers</span>
+          <span class="lb-score">⭐ 410</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ========== BRAND VOICE ========== -->
+  <section>
+    <div class="section-label">Brand Voice</div>
+    <h2 class="section-title" style="font-family: var(--font-fredoka);">How CELL QUEST Talks</h2>
+    <p class="section-desc">Encouraging, curious, never condescending. Science as adventure, not homework.</p>
+
+    <div class="voice-grid">
+      <div class="voice-card" style="border-color: rgba(52,199,89,0.2);">
+        <div class="voice-tag good">✦ This</div>
+        <div class="voice-example">"Nice try! 🧬 The cell membrane controls what enters and exits. Think of it like a security guard at a concert. Want another shot?"</div>
+        <div class="voice-note">Warm, uses analogy, invites retry, no shame.</div>
+      </div>
+      <div class="voice-card" style="border-color: rgba(255,107,107,0.2);">
+        <div class="voice-tag bad">✗ Not This</div>
+        <div class="voice-example">"Incorrect. The answer is B. The cell membrane is a selectively permeable phospholipid bilayer."</div>
+        <div class="voice-note">Cold, overly technical, discouraging for Grade 7.</div>
+      </div>
+    </div>
+
+    <div class="tone-pills">
+      <div class="tone-pill">
+        <div class="icon">🔭</div>
+        <div class="label">Curious</div>
+        <div class="sub">"Let's find out..."</div>
+      </div>
+      <div class="tone-pill">
+        <div class="icon">🌟</div>
+        <div class="label">Encouraging</div>
+        <div class="sub">"You're so close!"</div>
+      </div>
+      <div class="tone-pill">
+        <div class="icon">🧪</div>
+        <div class="label">Playful</div>
+        <div class="sub">"Level up time!"</div>
+      </div>
+      <div class="tone-pill">
+        <div class="icon">📖</div>
+        <div class="label">Clear</div>
+        <div class="sub">"In other words..."</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Footer -->
+<footer style="text-align: center; padding: 50px 40px; background: var(--dark-bg); color: var(--text-on-dark-secondary); font-size: 13px;">
+  <div style="font-family: var(--font-fredoka); font-size: 22px; font-weight: 700; color: var(--text-on-dark); margin-bottom: 8px;">CELL <span style="color: var(--green-B);">QUEST</span></div>
+  <p>Brand Exploration v2 — Pick your green, pick your font, let's build.</p>
+</footer>
+
+</body>
+</html>
