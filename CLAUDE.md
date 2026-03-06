@@ -75,6 +75,12 @@ public/
 android/                      # Capacitor Android project
 ```
 
+### Releases & Download Links (`public/download-links/`)
+- QR codes for APK download links are stored in `public/download-links/`
+- Naming convention: `YYYY-MM-DD-vX.Y.Z.svg` (e.g., `2026-03-06-v1.0.0.svg`)
+- **All versions are stacked — never delete or replace existing files.** Each release adds a new QR code file on top of previous ones for version tracking and audit purposes.
+- APKs are attached to GitHub Releases at `https://github.com/dmdfajardo00/cell-quest/releases`
+
 ### Game State Machine (`gameState.svelte.ts`)
 - **Scoring**: 5 base pts + speed bonus (10 for <5s, 5 for <25s, 0 for >25s)
 - **Mistakes**: -1 per wrong attempt, max -3 per question, never below 0 total
