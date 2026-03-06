@@ -1,11 +1,18 @@
 <script lang="ts">
   import Nucleon from '../components/mascot/Nucleon.svelte';
   import BlobButton from '../components/ui/BlobButton.svelte';
-  import { game, setPlayerName, setDifficulty, startGame } from '../state/gameState.svelte';
+  import { game, setPlayerName, setDifficulty, startGame, resumeGame } from '../state/gameState.svelte';
   import { initAudio } from '../audio/soundManager';
   import type { Difficulty } from '../data/types';
 
-  let nameInput = $state('');
+  interface Props {
+    hasSavedGame?: boolean;
+  }
+
+  let { hasSavedGame = false }: Props = $props();
+
+  let nameInput = $state(game.player.name || '');
+  let resuming = $state(false);
 
   const difficulties: { value: Difficulty; label: string; color: string; bg: string }[] = [
     { value: 'easy', label: 'Easy', color: '#28A745', bg: '#E8FAEB' },
@@ -18,6 +25,17 @@
     if (!nameInput.trim()) return;
     setPlayerName(nameInput.trim());
     startGame();
+  }
+
+  async function handleResume() {
+    initAudio();
+    resuming = true;
+    const ok = await resumeGame();
+    if (!ok) {
+      // Snapshot was invalid, just start fresh
+      handleStart();
+    }
+    resuming = false;
   }
 
   function selectDiff(d: Difficulty) {
@@ -77,11 +95,16 @@
         </div>
       </div>
 
-      <!-- Start button -->
+      <!-- Start / Resume buttons -->
       <div class="start-btn-area">
         <BlobButton onclick={handleStart} disabled={!nameInput.trim()} size="lg">
-          Start Cell Quest
+          {hasSavedGame ? 'New Game' : 'Start Cell Quest'}
         </BlobButton>
+        {#if hasSavedGame}
+          <BlobButton onclick={handleResume} variant="secondary" size="lg" disabled={resuming}>
+            Resume Game
+          </BlobButton>
+        {/if}
       </div>
     </div>
   </div>
@@ -278,5 +301,8 @@
 
   .start-btn-area {
     margin-top: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 </style>

@@ -13,7 +13,8 @@
     progress,
     difficulty,
     completedCount,
-    totalCount
+    totalCount,
+    onNameClick
   } = $props();
 
   const difficultyColors = {
@@ -25,7 +26,12 @@
 
 <header class="topbar">
   <div class="left">
-    <span class="player-name">{playerName}</span>
+    <button class="player-name-btn" onclick={onNameClick} aria-label="Open settings">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.5">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+      </svg>
+      {playerName}
+    </button>
     <span class="difficulty-badge" style="background: {difficultyColors[difficulty]}20; color: {difficultyColors[difficulty]}; border: 1.5px solid {difficultyColors[difficulty]}40;">
       {difficulty}
     </span>
@@ -81,11 +87,25 @@
     gap: 6px;
   }
 
-  .player-name {
+  .player-name-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     font-family: var(--font-display);
     color: var(--text-on-dark);
     font-size: 13px;
     font-weight: 600;
+    background: none;
+    border: 1.5px solid transparent;
+    border-radius: 8px;
+    padding: 3px 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .player-name-btn:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.12);
   }
 
   .difficulty-badge {

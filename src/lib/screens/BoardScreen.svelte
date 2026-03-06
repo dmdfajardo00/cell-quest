@@ -4,6 +4,7 @@
   import GameBoard from '../components/board/GameBoard.svelte';
   import Nucleon from '../components/mascot/Nucleon.svelte';
   import QuestionModal from '../components/game/QuestionModal.svelte';
+  import SettingsModal from '../components/ui/SettingsModal.svelte';
   import {
     game,
     openQuestion,
@@ -21,8 +22,13 @@
     canAffordHint,
     isHintUnlocked,
     getIncorrectCount,
+    getScoreHistory,
+    updatePlayerName,
+    clearAllGameData,
     setScreen,
   } from '../state/gameState.svelte';
+
+  let showSettings = $state(false);
 
   function handleCheckpointClick(id: number) {
     openQuestion(id);
@@ -60,6 +66,7 @@
     difficulty={game.difficulty}
     completedCount={getCompletedCount()}
     totalCount={getTotalCheckpoints()}
+    onNameClick={() => showSettings = true}
   />
 
   <div class="board-content">
@@ -141,6 +148,17 @@
       onTryAgain={tryAgain}
       onContinue={continueAfterWrong}
       onClose={() => setScreen('board')}
+    />
+  {/if}
+
+  {#if showSettings}
+    <SettingsModal
+      playerName={game.player.name}
+      completedLevels={game.completedLevels}
+      scoreHistory={getScoreHistory()}
+      onSaveName={(name) => { updatePlayerName(name); showSettings = false; }}
+      onClearData={() => { clearAllGameData(); showSettings = false; }}
+      onClose={() => showSettings = false}
     />
   {/if}
 </div>

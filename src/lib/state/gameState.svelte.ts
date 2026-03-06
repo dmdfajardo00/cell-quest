@@ -8,6 +8,17 @@ import type {
 } from '../data/types';
 import { questions, getQuestionsByDifficulty } from '../data/questions';
 import { play } from '../audio/soundManager';
+import {
+  savePrefs,
+  loadPrefs,
+  saveHistory,
+  loadHistory,
+  saveGameSnapshot,
+  loadGameSnapshot,
+  clearGameSnapshot,
+  clearAllData as clearStorage,
+  type PlayerPrefs,
+} from './storage';
 
 // Scoring constants
 const BASE_POINTS = 5;
@@ -175,8 +186,21 @@ export function getMaxPossibleScore(): number {
   return total * (BASE_POINTS + SPEED_BONUS_FAST); // Best case: all correct, all fast
 }
 
-// localStorage score history
-const HISTORY_KEY = 'cellquest_score_history';
+// --- Persistence ---
+
+let cachedHistory: ScoreHistoryEntry[] = [];
+
+function persistPrefs() {
+  savePrefs({
+    name: game.player.name,
+    lastDifficulty: game.difficulty,
+    completedLevels: game.completedLevels,
+  });
+}
+
+function persistSnapshot() {
+  saveGameSnapshot(JSON.parse(JSON.stringify(game)));
+}
 
 export function saveScoreToHistory() {
   const entry: ScoreHistoryEntry = {
@@ -189,22 +213,57 @@ export function saveScoreToHistory() {
     questionsCorrect: game.questionsCorrect,
     questionsTotal: game.checkpoints.length,
   };
-
-  try {
-    const existing = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
-    existing.push(entry);
-    localStorage.setItem(HISTORY_KEY, JSON.stringify(existing));
-  } catch {
-    // localStorage unavailable, silently fail
-  }
+  cachedHistory = [...cachedHistory, entry];
+  saveHistory(cachedHistory);
 }
 
 export function getScoreHistory(): ScoreHistoryEntry[] {
-  try {
-    return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
-  } catch {
-    return [];
+  return cachedHistory;
+}
+
+// Init: restore prefs and history from storage
+export async function initFromStorage(): Promise<{ hasSave: boolean }> {
+  const [prefs, history, snapshot] = await Promise.all([
+    loadPrefs(),
+    loadHistory(),
+    loadGameSnapshot(),
+  ]);
+
+  cachedHistory = history;
+
+  if (prefs) {
+    game.player.name = prefs.name;
+    game.difficulty = prefs.lastDifficulty;
+    game.completedLevels = prefs.completedLevels ?? [];
   }
+
+  return { hasSave: snapshot !== null };
+}
+
+export async function resumeGame(): Promise<boolean> {
+  const snapshot = await loadGameSnapshot();
+  if (!snapshot) return false;
+  Object.assign(game, snapshot);
+  // Ensure we're on the board, not stuck in question
+  if (game.screen === 'question') {
+    game.screen = 'board';
+    game.showingFeedback = false;
+    game.feedbackType = null;
+    game.selectedAnswer = null;
+  }
+  return true;
+}
+
+export async function clearAllGameData() {
+  await clearStorage();
+  cachedHistory = [];
+  const initial = createInitialState();
+  Object.assign(game, initial);
+}
+
+export function updatePlayerName(name: string) {
+  game.player.name = name;
+  persistPrefs();
 }
 
 // Actions
@@ -236,6 +295,8 @@ export function startGame() {
   game.nucleonMessage = "Let's explore the cell! Tap the glowing checkpoint to start your first challenge.";
   game.screen = 'board';
   play('gameStart');
+  persistPrefs();
+  clearGameSnapshot();
 }
 
 export function openQuestion(checkpointId: number) {
@@ -257,6 +318,7 @@ export function openQuestion(checkpointId: number) {
   game.nucleonExpression = 'thinking';
   game.nucleonMessage = `Let's learn about the ${q?.organelle ?? 'cell'}! Read the passage carefully.`;
   game.screen = 'question';
+  persistSnapshot();
 }
 
 export function selectAnswer(index: number) {
@@ -407,12 +469,15 @@ export function nextCheckpoint() {
     game.nucleonMessage = "Great progress! Tap the next glowing checkpoint when you're ready.";
     game.screen = 'board';
     play('advance');
+    persistSnapshot();
   } else {
     // Level complete
     if (!game.completedLevels.includes(game.difficulty)) {
       game.completedLevels = [...game.completedLevels, game.difficulty];
     }
     saveScoreToHistory();
+    persistPrefs();
+    clearGameSnapshot();
     game.nucleonExpression = 'celebrating';
     game.nucleonMessage = `You completed the ${game.difficulty} level! Show your score to your teacher!`;
     game.screen = 'results';
@@ -445,8 +510,14 @@ export function replay() {
 }
 
 export function backToStart() {
+  clearGameSnapshot();
   const initial = createInitialState();
+  // Preserve name and completedLevels across sessions
+  const name = game.player.name;
+  const completed = game.completedLevels;
   Object.assign(game, initial);
+  game.player.name = name;
+  game.completedLevels = completed;
 }
 
 export function hasNextLevel(): boolean {
