@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img">
+  <title>Option 2: Microscope Lens</title>
+  <defs>
+    <radialGradient id="o2-glass" cx="50%" cy="45%">
+      <stop offset="0%" stop-color="#E0D4FF" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#7C3AED" stop-opacity="0.08"/>
+    </radialGradient>
+    <radialGradient id="o2-cell" cx="40%" cy="35%">
+      <stop offset="0%" stop-color="#A78BFA"/>
+      <stop offset="60%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#6D28D9"/>
+    </radialGradient>
+    <clipPath id="o2-lens-clip">
+      <circle cx="256" cy="230" r="160"/>
+    </clipPath>
+  </defs>
+  <rect width="512" height="512" rx="108" fill="#1A1A2E"/>
+  <!-- Lens frame outer -->
+  <circle cx="256" cy="230" r="175" fill="none" stroke="#A78BFA" stroke-width="6" opacity="0.5"/>
+  <circle cx="256" cy="230" r="168" fill="none" stroke="#6D28D9" stroke-width="3"/>
+  <!-- Glass tint -->
+  <circle cx="256" cy="230" r="160" fill="url(#o2-glass)"/>
+  <!-- Cell inside lens -->
+  <g clip-path="url(#o2-lens-clip)">
+    <path d="M256 100 C340 100, 400 160, 400 230 C400 310, 340 370, 256 370 C172 370, 112 310, 112 230 C112 160, 172 100, 256 100Z" fill="url(#o2-cell)" opacity="0.7"/>
+    <!-- Nucleus -->
+    <ellipse cx="256" cy="225" rx="48" ry="44" fill="#8B5CF6"/>
+    <ellipse cx="246" cy="215" rx="18" ry="14" fill="#C4B5FD" opacity="0.4"/>
+    <!-- Organelles -->
+    <ellipse cx="180" cy="190" rx="18" ry="8" fill="#FF6B6B" opacity="0.8" transform="rotate(-20 180 190)"/>
+    <ellipse cx="330" cy="280" rx="16" ry="7" fill="#FF6B6B" opacity="0.7" transform="rotate(25 330 280)"/>
+    <ellipse cx="320" cy="170" rx="15" ry="9" fill="#4ADE80" opacity="0.75" transform="rotate(10 320 170)"/>
+    <ellipse cx="175" cy="290" rx="14" ry="8" fill="#4ADE80" opacity="0.65"/>
+    <circle cx="210" cy="300" r="16" fill="#4EA8DE" opacity="0.5"/>
+    <circle cx="290" cy="160" r="5" fill="#FFB938" opacity="0.9"/>
+    <circle cx="210" cy="230" r="4" fill="#FFB938" opacity="0.8"/>
+    <circle cx="300" cy="250" r="4.5" fill="#FFB938" opacity="0.85"/>
+    <!-- ER -->
+    <path d="M195 260 Q215 245, 235 260 Q255 275, 275 260 Q295 245, 315 260" fill="none" stroke="#C4B5FD" stroke-width="1.5" opacity="0.35"/>
+  </g>
+  <!-- Lens glare -->
+  <ellipse cx="200" cy="170" rx="50" ry="30" fill="#FFF" opacity="0.07" transform="rotate(-25 200 170)"/>
+  <!-- Handle -->
+  <rect x="240" y="400" width="32" height="70" rx="8" fill="#6D28D9"/>
+  <rect x="244" y="400" width="24" height="12" rx="4" fill="#8B5CF6"/>
+  <!-- Crosshair marks -->
+  <line x1="256" y1="140" x2="256" y2="155" stroke="#A78BFA" stroke-width="1.5" opacity="0.4"/>
+  <line x1="256" y1="305" x2="256" y2="320" stroke="#A78BFA" stroke-width="1.5" opacity="0.4"/>
+  <line x1="166" y1="230" x2="181" y2="230" stroke="#A78BFA" stroke-width="1.5" opacity="0.4"/>
+  <line x1="331" y1="230" x2="346" y2="230" stroke="#A78BFA" stroke-width="1.5" opacity="0.4"/>
+</svg>

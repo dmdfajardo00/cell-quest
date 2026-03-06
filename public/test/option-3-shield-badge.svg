@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img">
+  <title>Option 3: Shield Badge / Quest Crest</title>
+  <defs>
+    <linearGradient id="o3-shield" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#6D28D9"/>
+    </linearGradient>
+    <linearGradient id="o3-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="50%" stop-color="#FFB938"/>
+      <stop offset="100%" stop-color="#E6A020"/>
+    </linearGradient>
+    <radialGradient id="o3-cell" cx="50%" cy="40%">
+      <stop offset="0%" stop-color="#C4B5FD"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </radialGradient>
+    <clipPath id="o3-top-clip">
+      <path d="M256 60 L420 130 L420 260 L256 260 L92 260 L92 130Z"/>
+    </clipPath>
+  </defs>
+  <rect width="512" height="512" rx="108" fill="#1A1A2E"/>
+  <!-- Shield shape -->
+  <path d="M256 60 L420 130 L420 300 C420 400, 340 450, 256 470 C172 450, 92 400, 92 300 L92 130Z" fill="url(#o3-shield)"/>
+  <!-- Gold border -->
+  <path d="M256 60 L420 130 L420 300 C420 400, 340 450, 256 470 C172 450, 92 400, 92 300 L92 130Z" fill="none" stroke="url(#o3-gold)" stroke-width="5"/>
+  <!-- Divider line -->
+  <line x1="120" y1="262" x2="392" y2="262" stroke="#FFB938" stroke-width="2.5" opacity="0.8"/>
+  <!-- Top: Cell illustration -->
+  <g clip-path="url(#o3-top-clip)">
+    <circle cx="256" cy="180" r="70" fill="url(#o3-cell)" opacity="0.8"/>
+    <!-- Nucleus -->
+    <ellipse cx="256" cy="175" rx="28" ry="25" fill="#E0D4FF" opacity="0.6"/>
+    <!-- Organelles -->
+    <ellipse cx="210" cy="155" rx="12" ry="6" fill="#FF6B6B" opacity="0.8" transform="rotate(-20 210 155)"/>
+    <ellipse cx="300" cy="205" rx="11" ry="5.5" fill="#4ADE80" opacity="0.75" transform="rotate(15 300 205)"/>
+    <circle cx="220" cy="210" r="10" fill="#4EA8DE" opacity="0.5"/>
+    <circle cx="280" cy="150" r="4" fill="#FFB938" opacity="0.9"/>
+    <circle cx="240" cy="195" r="3" fill="#FFB938" opacity="0.8"/>
+    <!-- Membrane ring -->
+    <circle cx="256" cy="180" r="80" fill="none" stroke="#C4B5FD" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.4"/>
+  </g>
+  <!-- Bottom: CQ monogram -->
+  <text x="256" y="385" text-anchor="middle" font-family="'Fredoka', sans-serif" font-weight="700" font-size="100" fill="#F0F0F8" letter-spacing="4">CQ</text>
+  <!-- Small star accents -->
+  <circle cx="140" cy="262" r="6" fill="#FFB938"/>
+  <circle cx="372" cy="262" r="6" fill="#FFB938"/>
+  <!-- Crown/stars at top -->
+  <polygon points="256,48 260,56 268,56 262,62 264,70 256,66 248,70 250,62 244,56 252,56" fill="#FFB938" opacity="0.9"/>
+</svg>

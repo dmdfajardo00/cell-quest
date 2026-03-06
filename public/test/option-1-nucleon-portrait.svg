@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img">
+  <title>Option 1: Nucleon Portrait</title>
+  <defs>
+    <radialGradient id="o1-cell" cx="40%" cy="35%">
+      <stop offset="0%" stop-color="#A78BFA"/>
+      <stop offset="55%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#6D28D9"/>
+    </radialGradient>
+    <radialGradient id="o1-nucleus" cx="45%" cy="40%">
+      <stop offset="0%" stop-color="#C4B5FD"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </radialGradient>
+    <filter id="o1-glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="108" fill="#1A1A2E"/>
+  <ellipse cx="256" cy="256" rx="190" ry="175" fill="none" stroke="#A78BFA" stroke-width="2.5" stroke-dasharray="10 7" opacity="0.3"/>
+  <path d="M256 96 C340 96, 420 150, 430 230 C440 310, 400 390, 330 410 C260 430, 170 420, 120 360 C70 300, 80 200, 130 145 C180 90, 220 96, 256 96Z" fill="url(#o1-cell)" opacity="0.85"/>
+  <ellipse cx="260" cy="255" rx="62" ry="58" fill="url(#o1-nucleus)" filter="url(#o1-glow)"/>
+  <ellipse cx="248" cy="240" rx="25" ry="20" fill="#E0D4FF" opacity="0.35"/>
+  <ellipse cx="170" cy="190" rx="22" ry="10" fill="#FF6B6B" opacity="0.85" transform="rotate(-25 170 190)"/>
+  <ellipse cx="340" cy="330" rx="20" ry="9" fill="#FF6B6B" opacity="0.75" transform="rotate(30 340 330)"/>
+  <ellipse cx="350" cy="180" rx="18" ry="11" fill="#4ADE80" opacity="0.8" transform="rotate(15 350 180)"/>
+  <ellipse cx="160" cy="330" rx="16" ry="10" fill="#4ADE80" opacity="0.7" transform="rotate(-10 160 330)"/>
+  <circle cx="210" cy="340" r="20" fill="#4EA8DE" opacity="0.6"/>
+  <circle cx="300" cy="170" r="6" fill="#FFB938" opacity="0.9"/>
+  <circle cx="195" cy="260" r="5" fill="#FFB938" opacity="0.8"/>
+  <circle cx="320" cy="280" r="5.5" fill="#FFB938" opacity="0.85"/>
+  <path d="M190 290 Q210 275, 230 290 Q250 305, 270 290 Q290 275, 310 290" fill="none" stroke="#C4B5FD" stroke-width="2" opacity="0.4"/>
+  <ellipse cx="245" cy="248" rx="10" ry="12" fill="#FFF"/>
+  <ellipse cx="275" cy="248" rx="10" ry="12" fill="#FFF"/>
+  <circle cx="247" cy="251" r="5.5" fill="#1A1A2E"/>
+  <circle cx="277" cy="251" r="5.5" fill="#1A1A2E"/>
+  <circle cx="249" cy="248" r="2" fill="#FFF"/>
+  <circle cx="279" cy="248" r="2" fill="#FFF"/>
+  <ellipse cx="235" cy="265" rx="7" ry="4.5" fill="#FF9AB4" opacity="0.4"/>
+  <ellipse cx="285" cy="265" rx="7" ry="4.5" fill="#FF9AB4" opacity="0.4"/>
+  <path d="M250 270 Q260 280, 270 270" fill="none" stroke="#6D28D9" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
