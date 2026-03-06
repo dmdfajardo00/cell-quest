@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportHeight="108"
+    android:viewportWidth="108">
+    <!-- Letter C as cell membrane (centered in 18-90 safe zone) -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M70,30 C55,22 32,24 26,38 C20,52 20,68 28,80 C36,92 56,94 72,84"
+        android:strokeColor="#7C3AED"
+        android:strokeWidth="10"
+        android:strokeLineCap="round"/>
+    <!-- Nucleus -->
+    <path
+        android:fillColor="#8B5CF6"
+        android:pathData="M49,56 A10,9.5 0 1,1 49,37 A10,9.5 0 1,1 49,56Z"
+        android:fillAlpha="0.8"/>
+    <!-- Nucleus highlight -->
+    <path
+        android:fillColor="#E0D4FF"
+        android:pathData="M47,50 A3.5,2.8 0 1,1 47,44.4 A3.5,2.8 0 1,1 47,50Z"
+        android:fillAlpha="0.3"/>
+    <!-- Mitochondria (coral) -->
+    <path
+        android:fillColor="#FF6B6B"
+        android:pathData="M39,38 A3.5,1.6 0 1,1 39,34.8 A3.5,1.6 0 1,1 39,38Z"
+        android:fillAlpha="0.8"/>
+    <path
+        android:fillColor="#FF6B6B"
+        android:pathData="M60,70 A3.2,1.4 0 1,1 60,67.2 A3.2,1.4 0 1,1 60,70Z"
+        android:fillAlpha="0.7"/>
+    <!-- Chloroplasts (green) -->
+    <path
+        android:fillColor="#4ADE80"
+        android:pathData="M62,42 A3,1.8 0 1,1 62,38.4 A3,1.8 0 1,1 62,42Z"
+        android:fillAlpha="0.75"/>
+    <path
+        android:fillColor="#4ADE80"
+        android:pathData="M35,70 A2.6,1.6 0 1,1 35,66.8 A2.6,1.6 0 1,1 35,70Z"
+        android:fillAlpha="0.65"/>
+    <!-- Vacuole (blue) -->
+    <path
+        android:fillColor="#4EA8DE"
+        android:pathData="M40,65 A3.2,3.2 0 1,1 40,58.6 A3.2,3.2 0 1,1 40,65Z"
+        android:fillAlpha="0.5"/>
+    <!-- Ribosomes (gold dots) -->
+    <path
+        android:fillColor="#FFB938"
+        android:pathData="M54,37 A1,1 0 1,1 54,35 A1,1 0 1,1 54,37Z"
+        android:fillAlpha="0.85"/>
+    <path
+        android:fillColor="#FFB938"
+        android:pathData="M44,76 A0.9,0.9 0 1,1 44,74.2 A0.9,0.9 0 1,1 44,76Z"
+        android:fillAlpha="0.75"/>
+    <path
+        android:fillColor="#FFB938"
+        android:pathData="M62,56 A0.8,0.8 0 1,1 62,54.4 A0.8,0.8 0 1,1 62,56Z"
+        android:fillAlpha="0.8"/>
+</vector>
