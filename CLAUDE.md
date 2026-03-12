@@ -130,3 +130,5 @@ Run dev server and test manually at `http://localhost:5555`. The game flow:
 5. Complete all checkpoints -> Results screen with star rating
 
 For automated testing, use Playwright MCP browser tools against `localhost:5555`.
+
+**All screenshots** from Playwright MCP or agent browser sessions **must be saved to `/.test-screenshots/`**. This folder is git-ignored — never commit test screenshots.

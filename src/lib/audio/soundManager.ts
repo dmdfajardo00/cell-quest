@@ -5,6 +5,13 @@
 
 import { getContext, setMasterVolume, getMasterVolume } from './synth';
 import * as sounds from './sounds';
+import {
+  startMusic,
+  stopMusic,
+  pauseMusic,
+  resumeMusic,
+  isMusicPlaying,
+} from './bgMusic';
 
 const STORAGE_KEY = 'cellquest_audio';
 
@@ -53,6 +60,16 @@ export function toggleMute(): boolean {
   prefs.muted = !prefs.muted;
   setMasterVolume(prefs.muted ? 0 : prefs.volume);
   savePrefs(prefs);
+
+  // Pause/resume background music with mute state
+  if (isMusicPlaying()) {
+    if (prefs.muted) {
+      pauseMusic();
+    } else {
+      resumeMusic();
+    }
+  }
+
   return prefs.muted;
 }
 
@@ -73,4 +90,16 @@ export function setVolume(v: number) {
 /** Get current volume (0-1) */
 export function getVolume(): number {
   return prefs.volume;
+}
+
+/** Start background music (delegates to bgMusic module) */
+export function startBgMusic() {
+  if (prefs.muted) return;
+  if (!initialized) initAudio();
+  startMusic();
+}
+
+/** Stop background music (delegates to bgMusic module) */
+export function stopBgMusic() {
+  stopMusic();
 }

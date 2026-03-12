@@ -2,7 +2,7 @@ export type Difficulty = 'easy' | 'moderate' | 'difficult';
 export type QuestionType = 'mc' | 'tf';
 export type AnswerState = 'default' | 'selected' | 'correct' | 'wrong' | 'disabled';
 export type CheckpointState = 'locked' | 'active' | 'completed';
-export type Screen = 'start' | 'board' | 'question' | 'results';
+export type Screen = 'start' | 'board' | 'question' | 'results' | 'completion';
 export type NucleonExpression = 'happy' | 'thinking' | 'concerned' | 'celebrating' | 'idle';
 
 export interface Question {

@@ -7,7 +7,7 @@ import type {
   ScoreHistoryEntry,
 } from '../data/types';
 import { questions, getQuestionsByDifficulty } from '../data/questions';
-import { play } from '../audio/soundManager';
+import { play, startBgMusic, stopBgMusic } from '../audio/soundManager';
 import {
   savePrefs,
   loadPrefs,
@@ -244,13 +244,14 @@ export async function resumeGame(): Promise<boolean> {
   const snapshot = await loadGameSnapshot();
   if (!snapshot) return false;
   Object.assign(game, snapshot);
-  // Ensure we're on the board, not stuck in question
-  if (game.screen === 'question') {
+  // Ensure we're on the board, not stuck in question or completion
+  if (game.screen === 'question' || game.screen === 'completion') {
     game.screen = 'board';
     game.showingFeedback = false;
     game.feedbackType = null;
     game.selectedAnswer = null;
   }
+  startBgMusic();
   return true;
 }
 
@@ -295,6 +296,7 @@ export function startGame() {
   game.nucleonMessage = "Let's explore the cell! Tap the glowing checkpoint to start your first challenge.";
   game.screen = 'board';
   play('gameStart');
+  startBgMusic();
   persistPrefs();
   clearGameSnapshot();
 }
@@ -412,6 +414,12 @@ export function submitAnswer() {
       hintUsed: game.hintsUnlocked[q.id] ?? false,
     });
   } else {
+    // True/False questions get no retry (50/50 makes retry meaningless)
+    const isTrueFalse = q.type === 'tf';
+    if (isTrueFalse) {
+      game.attemptCount = 2; // Force final attempt
+    }
+
     // Apply mistake penalty: -1 per wrong attempt, max -3 total per question
     const penaltySoFar = Math.min(game.attemptCount - 1, MAX_MISTAKE_PENALTY - 1);
     if (penaltySoFar < MAX_MISTAKE_PENALTY) {
@@ -422,7 +430,7 @@ export function submitAnswer() {
     game.showingFeedback = true;
     game.currentStreak = 0;
     if (game.attemptCount >= 2) {
-      play('wrongFinal');
+      play('wompWomp');
     } else {
       play('wrong');
     }
@@ -454,6 +462,7 @@ export function tryAgain() {
   game.feedbackType = null;
   game.nucleonExpression = 'thinking';
   game.nucleonMessage = "Give it another shot! Read the passage one more time.";
+  play('boing');
 }
 
 export function nextCheckpoint() {
@@ -479,9 +488,18 @@ export function nextCheckpoint() {
     persistPrefs();
     clearGameSnapshot();
     game.nucleonExpression = 'celebrating';
-    game.nucleonMessage = `You completed the ${game.difficulty} level! Show your score to your teacher!`;
-    game.screen = 'results';
-    play('levelComplete');
+
+    if (!hasNextLevel()) {
+      // Final level complete - show completion celebration
+      stopBgMusic();
+      game.nucleonMessage = 'Congratulations! You completed ALL levels!';
+      game.screen = 'completion';
+      play('sillyVictory');
+    } else {
+      game.nucleonMessage = `You completed the ${game.difficulty} level! Show your score to your teacher!`;
+      game.screen = 'results';
+      play('levelComplete');
+    }
   }
 
   // Reset question state
@@ -510,6 +528,7 @@ export function replay() {
 }
 
 export function backToStart() {
+  stopBgMusic();
   clearGameSnapshot();
   const initial = createInitialState();
   // Preserve name and completedLevels across sessions
@@ -527,4 +546,20 @@ export function hasNextLevel(): boolean {
 
 export function getIncorrectCount(): number {
   return game.history.filter(h => !h.correct).length;
+}
+
+/** Debug: jump straight to the completion screen for testing */
+export function debugShowCompletion() {
+  game.player.name = game.player.name || 'Tester';
+  game.difficulty = 'difficult';
+  game.player.score = 90;
+  game.questionsCorrect = 6;
+  game.questionsAnswered = 6;
+  game.checkpoints = buildCheckpoints('difficult').map(cp => ({ ...cp, state: 'completed' as const }));
+  game.player.completedCheckpoints = [0, 1, 2, 3, 4, 5];
+  game.completedLevels = ['easy', 'moderate', 'difficult'];
+  game.nucleonExpression = 'celebrating';
+  game.nucleonMessage = 'Congratulations! You completed ALL levels!';
+  game.screen = 'completion';
+  play('sillyVictory');
 }

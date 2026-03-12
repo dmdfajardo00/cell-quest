@@ -3,6 +3,7 @@
   import StartScreen from './lib/screens/StartScreen.svelte';
   import BoardScreen from './lib/screens/BoardScreen.svelte';
   import ResultsScreen from './lib/screens/ResultsScreen.svelte';
+  import CompletionScreen from './lib/screens/CompletionScreen.svelte';
 
   let hasSavedGame = $state(false);
   let ready = $state(false);
@@ -26,5 +27,7 @@
     <BoardScreen />
   {:else if game.screen === 'results'}
     <ResultsScreen />
+  {:else if game.screen === 'completion'}
+    <CompletionScreen />
   {/if}
 </main>

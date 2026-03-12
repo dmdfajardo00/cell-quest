@@ -71,6 +71,6 @@
     font-family="sans-serif"
     opacity={state === 'locked' ? 0.5 : 0.9}
   >
-    {organelle}
+    {state === 'completed' ? organelle : `Q${id + 1}`}
   </text>
 </g>

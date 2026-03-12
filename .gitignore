@@ -29,3 +29,6 @@ android/capacitor-cordova-android-plugins/build/
 *.njsproj
 *.sln
 *.sw?
+
+# Test screenshots from Playwright MCP / agent browser
+.test-screenshots/

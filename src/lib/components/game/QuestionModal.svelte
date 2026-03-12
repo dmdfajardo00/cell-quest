@@ -98,7 +98,7 @@
 <div class="overlay" onclick={handleOverlayClick} role="presentation">
   <div class="modal-card">
     <div class="modal-header">
-      <span class="organelle-name">{question.organelle}</span>
+      <span class="organelle-name">Question {question.id.replace(/^[a-z]/, '').replace(/^0+/, '')}</span>
       <div class="header-right">
         <span class="timer">{formatTime(elapsedSeconds)}</span>
         {#if difficultyStyles[difficulty]}

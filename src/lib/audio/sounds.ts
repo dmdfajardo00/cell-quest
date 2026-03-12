@@ -24,26 +24,67 @@ export function pop() {
   playNoise({ duration: 0.06, delay: 0.02, volume: 0.08, highpass: 2000 });
 }
 
-/** Correct answer - cheerful ascending C-E-G chime */
+/** Bubble pop variation - deeper, wetter pop */
+export function bubblePop() {
+  playTone({ freq: 200, freqEnd: 500, duration: 0.08, volume: 0.2, type: 'sine' });
+  playTone({ freq: 500, freqEnd: 800, duration: 0.06, delay: 0.04, volume: 0.15, type: 'sine' });
+  playNoise({ duration: 0.05, delay: 0.03, volume: 0.1, highpass: 3000 });
+  // Extra resonance
+  playTone({ freq: 300, duration: 0.12, delay: 0.06, volume: 0.08, type: 'triangle' });
+}
+
+/** Correct answer - celebratory ascending chime with sparkle trill */
 export function correct() {
-  playTone({ freq: 523, duration: 0.15, volume: 0.25, type: 'triangle' }); // C5
-  playTone({ freq: 659, duration: 0.15, delay: 0.1, volume: 0.25, type: 'triangle' }); // E5
-  playTone({ freq: 784, duration: 0.3, delay: 0.2, volume: 0.3, type: 'triangle', decay: 0.15 }); // G5
-  // Sparkle overtone
-  playTone({ freq: 1568, duration: 0.2, delay: 0.25, volume: 0.08, type: 'sine' });
+  // Main ascending arpeggio C-E-G-C
+  playTone({ freq: 523, duration: 0.12, volume: 0.25, type: 'triangle' }); // C5
+  playTone({ freq: 659, duration: 0.12, delay: 0.08, volume: 0.25, type: 'triangle' }); // E5
+  playTone({ freq: 784, duration: 0.15, delay: 0.16, volume: 0.28, type: 'triangle' }); // G5
+  playTone({ freq: 1047, duration: 0.3, delay: 0.24, volume: 0.3, type: 'triangle', decay: 0.15 }); // C6
+  // Sparkle trill on top
+  playTone({ freq: 1568, duration: 0.08, delay: 0.28, volume: 0.1, type: 'sine' }); // G6
+  playTone({ freq: 2093, duration: 0.08, delay: 0.32, volume: 0.08, type: 'sine' }); // C7
+  playTone({ freq: 1568, duration: 0.1, delay: 0.36, volume: 0.06, type: 'sine' }); // G6
+  // Victory shimmer
+  playNoise({ duration: 0.1, delay: 0.3, volume: 0.04, highpass: 6000 });
 }
 
-/** Wrong answer first attempt - gentle descending boop */
+/** Wrong answer first attempt - cartoon bonk */
 export function wrong() {
-  playTone({ freq: 330, duration: 0.18, volume: 0.2, type: 'triangle' }); // E4
-  playTone({ freq: 262, duration: 0.25, delay: 0.12, volume: 0.2, type: 'triangle', decay: 0.1 }); // C4
+  // Low thud
+  playTone({ freq: 100, freqEnd: 60, duration: 0.15, volume: 0.3, type: 'sine' });
+  // Comic "bonk" high ping
+  playTone({ freq: 800, freqEnd: 400, duration: 0.12, delay: 0.02, volume: 0.15, type: 'square' });
+  // Impact noise
+  playNoise({ duration: 0.08, volume: 0.12, highpass: 800, lowpass: 3000 });
 }
 
-/** Wrong answer second attempt - softer, lower sad tone */
+/** Wrong answer final - womp womp sad trombone */
+export function wompWomp() {
+  // First "womp" - descending slide
+  playTone({ freq: 350, freqEnd: 300, duration: 0.35, volume: 0.2, type: 'sawtooth' });
+  playTone({ freq: 350, freqEnd: 300, duration: 0.35, volume: 0.1, type: 'triangle' });
+  // Second "womp" - lower descending slide
+  playTone({ freq: 300, freqEnd: 220, duration: 0.45, delay: 0.35, volume: 0.2, type: 'sawtooth' });
+  playTone({ freq: 300, freqEnd: 220, duration: 0.45, delay: 0.35, volume: 0.1, type: 'triangle' });
+  // Sad trailing note
+  playTone({ freq: 200, freqEnd: 160, duration: 0.3, delay: 0.75, volume: 0.1, type: 'sawtooth', decay: 0.15 });
+}
+
+/** Kept for backwards compat - redirects to wompWomp */
 export function wrongFinal() {
-  playTone({ freq: 294, duration: 0.2, volume: 0.15, type: 'sine' }); // D4
-  playTone({ freq: 247, duration: 0.3, delay: 0.15, volume: 0.15, type: 'sine', decay: 0.15 }); // B3
-  playTone({ freq: 220, duration: 0.4, delay: 0.3, volume: 0.1, type: 'sine', decay: 0.2 }); // A3
+  wompWomp();
+}
+
+/** Boing sound for retry - springy bounce */
+export function boing() {
+  // Rising spring
+  playTone({ freq: 200, freqEnd: 600, duration: 0.15, volume: 0.2, type: 'sine' });
+  // Bounce back down
+  playTone({ freq: 600, freqEnd: 350, duration: 0.1, delay: 0.12, volume: 0.18, type: 'sine' });
+  // Small bounce
+  playTone({ freq: 400, freqEnd: 450, duration: 0.08, delay: 0.2, volume: 0.12, type: 'sine' });
+  // Springy overtone
+  playTone({ freq: 800, freqEnd: 1200, duration: 0.1, delay: 0.05, volume: 0.06, type: 'square' });
 }
 
 /** Hint sparkle/twinkle */
@@ -132,4 +173,46 @@ export function slideOpen() {
 /** Sidebar slide close */
 export function slideClose() {
   playTone({ freq: 500, freqEnd: 300, duration: 0.12, volume: 0.1, type: 'sine' });
+}
+
+/** Silly victory jingle - extended celebration for completing all levels */
+export function sillyVictory() {
+  // Grand opening chord
+  playTone({ freq: 262, duration: 0.3, volume: 0.2, type: 'triangle' }); // C4
+  playTone({ freq: 330, duration: 0.3, volume: 0.18, type: 'triangle' }); // E4
+  playTone({ freq: 392, duration: 0.3, volume: 0.18, type: 'triangle' }); // G4
+
+  // Playful ascending melody
+  const melody = [
+    { freq: 523, delay: 0.3, dur: 0.15 },  // C5
+    { freq: 587, delay: 0.42, dur: 0.15 },  // D5
+    { freq: 659, delay: 0.54, dur: 0.15 },  // E5
+    { freq: 784, delay: 0.66, dur: 0.15 },  // G5
+    { freq: 880, delay: 0.78, dur: 0.15 },  // A5
+    { freq: 1047, delay: 0.9, dur: 0.25 },  // C6
+  ];
+  melody.forEach(n => {
+    playTone({ freq: n.freq, duration: n.dur, delay: n.delay, volume: 0.22, type: 'triangle' });
+  });
+
+  // Triumphant final chord
+  playTone({ freq: 523, duration: 0.6, delay: 1.15, volume: 0.2, type: 'triangle' }); // C5
+  playTone({ freq: 659, duration: 0.6, delay: 1.15, volume: 0.18, type: 'triangle' }); // E5
+  playTone({ freq: 784, duration: 0.6, delay: 1.15, volume: 0.18, type: 'triangle' }); // G5
+  playTone({ freq: 1047, duration: 0.6, delay: 1.15, volume: 0.2, type: 'triangle' }); // C6
+
+  // Silly bouncy overtones
+  playTone({ freq: 1200, freqEnd: 1600, duration: 0.1, delay: 1.0, volume: 0.08, type: 'sine' });
+  playTone({ freq: 1600, freqEnd: 1200, duration: 0.1, delay: 1.08, volume: 0.06, type: 'sine' });
+
+  // Confetti shimmer
+  playNoise({ duration: 0.4, delay: 1.2, volume: 0.05, highpass: 6000 });
+  playNoise({ duration: 0.3, delay: 1.5, volume: 0.03, highpass: 8000 });
+}
+
+/** Confetti burst sound effect */
+export function confetti() {
+  playNoise({ duration: 0.15, volume: 0.1, highpass: 4000 });
+  playTone({ freq: 1200, freqEnd: 1800, duration: 0.1, volume: 0.08, type: 'sine' });
+  playTone({ freq: 1500, freqEnd: 2000, duration: 0.08, delay: 0.05, volume: 0.06, type: 'sine' });
 }
